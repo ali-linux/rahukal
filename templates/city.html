@@ -1,0 +1,174 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<div id="rahukal" class="container">
+      <div class="rahukal-times">
+        <h4 class="h4-color">Current time in your city : <span id="clock"></span></h4>
+        <h5 class="rahu">Rahu kal</h5>
+{%if rahukal%}
+        <div class="time">
+          <div class="rahu-info">
+            <div class="sec-1 pr-3">
+              <div>
+                <img src="{% static 'assets/images/compass.png'%}" width="30" height="30" />
+                <h5>
+                  Location :<span style="color: #74a832"> In- {{city}} , {{rahukal.0.country}}</span>
+                </h5>
+              </div>
+              <div>
+                <img src="{% static 'assets/images/calendar.png'%}" width="30" height="30" />
+                <h5>
+                   <span id="dayName"></span>
+                  <span style="color: #74a832"> {{today_date}}</span>
+                </h5>
+              </div>
+            </div>
+            <div class="sec-2 pr-3">
+              <h3 class="pr-3">Today</h3>
+              <h6 class="today pr-3">{{rahukal.0.rahukal_start}} : {{rahukal.0.rahukal_finish}}</h6>
+            </div>
+            <div class="sec-3 pr-3">
+              <h5 class="h5-color pr-3">Duration</h5>
+              <h6 class="duration">01 : 18 : 00</h6>
+            </div>
+            <form id="dateForm" action=" {% url 'city' %} " method="get">
+  <input type="hidden" name="city" value="{{city}}, {{rahukal.0.country}} " />
+  <input id="dai" type="hidden" name="day" value="{{day_name}}" />
+  <input
+    id="date"
+    type="date"
+    name="today"
+    value="{{today_date}}"
+    onchange="submitHandler()"
+  />
+  <button onclick="tomorrow()" type="submit" class="today" >Tomorrow</button>
+  {% comment %} <button type="submit">submit</button> {% endcomment %}
+</form>
+          </div>
+        </div>
+
+        <div class="next-days">
+        <h1>Rahukal for next Days</h1>
+    {% for r in rahukal|slice:"1:" %}
+    <div id="next">
+      <h5 class="next-date">{{r.dayOfTheWeek}}, {{r.date}}</h5>
+      <h5 class="today"> {{r.rahukal_start}} : {{r.rahukal_finish}} </h5>
+    </div>
+    {% endfor %}
+        </div>
+        <style>
+   
+          
+        </style>
+ {%endif%}
+      </div>
+      <div class="about">
+        <div class="ad">
+        </div>
+        <h5 class="h5-color">About Rahu kal</h5>
+        <p class="text-justify">
+          According to Vedic astrology Rahu is an inauspicious planet. During
+          transition of planets the time under the influence of Rahu should be
+          avoided to do any auspicious work. Doing Puja, Hawan or Yagya (यज्ञ)
+          to propitiate auspicious.
+        </p>
+      </div>
+    </div>
+
+      <div class="container">
+      <p>
+        According to Vedic astrology Rahu is an inauspicious planet. During
+        transition of planets the time under the influence of Rahu should be
+        avoided to do any auspicious work. Doing Puja, Hawan or Yagya (यज्ञ) to
+        propitiate auspicious planets during this time is interfered by Rahu due
+        to its malefic nature. If one does Puja, Hawan or Yagya during Rahu Kaal
+        then desired results are not achieved. Hence it is important to consider
+        Rahu Kaal before starting any new work. By doing so, possibility of
+        achieving desired results is increased. However any work related to Rahu
+        gives good results during this period. Hawan, Yagya, etc. to propitiate
+        Rahu can be done during this time. According to Vedic astrology Rahu is
+        an inauspicious planet. During transition of planets the time under the
+        influence of Rahu should be avoided to do any auspicious work. Doing
+        Puja, Hawan or Yagya (यज्ञ) to propitiate auspicious planets during this
+        time is interfered by Rahu due to its malefic nature. If one does Puja,
+        Hawan or Yagya during Rahu Kaal then desired results are not achieved.
+        Hence it is important to consider Rahu Kaal before starting any new
+        work. By doing so, possibility of achieving desired results is
+        increased. However any work related to Rahu gives good results during
+        this period. Hawan, Yagya, etc. to propitiate Rahu can be done during
+        this time. According to Vedic astrology Rahu is an inauspicious planet
+        According to Vedic astrology Rahu is an inauspicious planet. During
+        transition of planets the time under the influence of Rahu should be
+        avoided to do any auspicious work. Doing Puja, Hawan or Yagya (यज्ञ) to
+        propitiate auspicious planets during this time is interfered by Rahu due
+        to its malefic nature. If one does Puja, Hawan or Yagya during Rahu Kaal
+        then desired results are not achieved. Hence it is important to consider
+        Rahu Kaal before starting any new work. By doing so, possibility of
+        achieving desired results is increased. However any work related to Rahu
+        gives good results during this period. Hawan, Yagya, etc. to propitiate
+        Rahu can be done during this time. According to Vedic astrology Rahu is
+        an inauspicious planet. During transition of planets the time under the
+        influence of Rahu should be avoided to do any auspicious work. Doing
+        Puja, Hawan or Yagya (यज्ञ) to propitiate auspicious planets during this
+        time is interfered by Rahu due to its malefic nature. If one does Puja,
+        Hawan or Yagya during Rahu Kaal then desired results are not achieved.
+        Hence it is important to consider Rahu Kaal before starting any new
+        work. By doing so, possibility of achieving desired results is
+        increased. However any work related to Rahu gives good results during
+        this period. Hawan, Yagya, etc. to propitiate Rahu can be done during
+        this time. According to Vedic astrology Rahu is an inauspicious planet
+        According to Vedic astrology Rahu is an inauspicious planet. During
+        transition of planets the time under the influence of Rahu should be
+        avoided to do any auspicious work. Doing Puja, Hawan or Yagya (यज्ञ) to
+        propitiate auspicious planets during this time is interfered by Rahu due
+        to its malefic nature. If one does Puja, Hawan or Yagya during Rahu Kaal
+        then desired results are not achieved. Hence it is important to consider
+        Rahu Kaal before starting any new work. By doing so, possibility of
+        achieving desired results is increased. However any work related to Rahu
+        gives good results during this period. Hawan, Yagya, etc. to propitiate
+        Rahu can be done during this time. According to Vedic astrology Rahu is
+        an inauspicious planet. During transition of planets the time under the
+        influence of Rahu should be avoided to do any auspicious work. Doing
+        Puja, Hawan or Yagya (यज्ञ) to propitiate auspicious planets during this
+        time is interfered by Rahu due to its malefic nature. If one does Puja,
+        Hawan or Yagya during Rahu Kaal then desired results are not achieved.
+        Hence it is important to consider Rahu Kaal before starting any new
+        work. By doing so, possibility of achieving desired results is
+        increased. However any work related to Rahu gives good results during
+        this period. Hawan, Yagya, etc. to propitiate Rahu can be done during
+        this time. According to Vedic astrology Rahu is an inauspicious planet
+      </p>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+var time = new Date();
+ document.getElementById('clock').innerHTML = time.toLocaleTimeString();
+  const date = document.getElementById("date").value;
+  const d = new Date(date);
+  var dayName = days[d.getDay()];
+  document.getElementById("dayName").innerHTML = dayName;
+
+  function formatDate(date) {
+    var d = new Date(date),
+      month = "" + (d.getMonth() + 1),
+      day = "" + d.getDate(),
+      year = d.getFullYear();
+
+    if (month.length < 2) month = "0" + month;
+    if (day.length < 2) day = "0" + day;
+
+    return [year, month, day].join("-");
+  }
+
+  function submitHandler() {
+    const a = document.getElementById("dateForm");
+    a.submit();
+  }
+  function tomorrow() {
+    const date = document.getElementById("date");
+    const d = new Date(date.value);
+    d.setDate(d.getDate() + 1);
+    date.value = formatDate(d);
+  }
+</script>
+{% endblock content %}
