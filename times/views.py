@@ -78,12 +78,13 @@ def index(request):
 
     sunset_delta = timedelta(hours=sunset.hour, minutes=sunset.minute)
     rahukal_finish = rahukal_start + timedelta(hours=diffrence)
+    duration = rahukal_finish - rahukal_start
 
     rahukal_start = datetime.strptime(str(rahukal_start), '%H:%M:%S').strftime("%I:%M %p")
     rahukal_finish = datetime.strptime(str(rahukal_finish), '%H:%M:%S').strftime("%I:%M %p")
     sunrise = sunrise.strftime("%I:%M %p")
     sunset = sunset.strftime("%I:%M %p")
-    a = {'rahukal_start': rahukal_start, 'rahukal_finish': rahukal_finish, 'sunrise': sunrise, 'sunset': sunset, 'date': datee,'city':c['city']}
+    a = {'rahukal_start': rahukal_start, 'rahukal_finish': rahukal_finish, 'sunrise': sunrise, 'sunset': sunset, 'date': datee,'city':c['city'],'duration':duration}
     b = a.copy()
     rahukal_days.append(b)
   context = {'rahukal': rahukal_days}
@@ -187,13 +188,13 @@ def city(request):
 
         sunset_delta = timedelta(hours=sunset.hour, minutes=sunset.minute)
         rahukal_finish = rahukal_start + timedelta(hours=diffrence)
-
+        duration = rahukal_finish - rahukal_start
         rahukal_start = datetime.strptime(str(rahukal_start), '%H:%M:%S').strftime("%I:%M %p")
         rahukal_finish = datetime.strptime(str(rahukal_finish), '%H:%M:%S').strftime("%I:%M %p")
         sunrise = sunrise.strftime("%I:%M %p")
         sunset = sunset.strftime("%I:%M %p")
         # rahukal_days['day{}'.format(a + 1)] = {'rahukal_start': rahukal_start, 'rahukal_finish': rahukal_finish, 'sunrise': sunrise, 'sunset': sunset, 'date': datee}
-        a = {'rahukal_start': rahukal_start, 'rahukal_finish': rahukal_finish, 'sunrise': sunrise, 'sunset': sunset, 'date': datee,'dayOfTheWeek':dayOfTheWeek,'country':country_name}
+        a = {'rahukal_start': rahukal_start, 'rahukal_finish': rahukal_finish, 'sunrise': sunrise, 'sunset': sunset, 'date': datee,'dayOfTheWeek':dayOfTheWeek,'country':country_name,'duration':duration}
         b = a.copy()
         rahukal_days.append(b)
       except Exception:

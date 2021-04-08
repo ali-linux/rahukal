@@ -26,6 +26,35 @@
 
     <title>Rahu Kal</title>
   </head>
+  <script>
+    var now = new Date();
+    var days = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+
+    var day = days[now.getDay()];
+    document.getElementById("day").value = day;
+
+    function formatDate(date) {
+      var d = new Date(date),
+        month = "" + (d.getMonth() + 1),
+        day = "" + d.getDate(),
+        year = d.getFullYear();
+
+      if (month.length < 2) month = "0" + month;
+      if (day.length < 2) day = "0" + day;
+
+      return [year, month, day].join("-");
+    }
+
+    document.getElementById("today").value = formatDate(now);
+  </script>
   <body>
     <header>
       <a
@@ -34,19 +63,123 @@
         href=" {% url 'index' %} "
         ><img src="{% static 'assets/images/Capture.png'%}  " class="img-fluid"
       /></a>
+    </header>
+    <div class="forms container">
       <form action="{% url 'city' %}" method="get" autocomplete="off">
-        <input
-          type="text"
-          name="city"
-          id="search"
-          placeholder="Enter city"
-          autocomplete="off"
-        />
+        <div class="search">
+          <input
+            type="text"
+            name="city"
+            id="search"
+            placeholder="Enter city"
+            autocomplete="off"
+          />
+          <button id="searchbtn" class="ml-3" type="submit">search</button>
+        </div>
         <input id="day" type="hidden" name="day" value="" />
         <input id="today" type="hidden" name="today" value="" />
         <div id="match-list"></div>
       </form>
-    </header>
+
+      <h1 class="pt-3"><b>Rahu kal</b></h1>
+    </div>
+    {% block content %}{% endblock content %}
+    <div class="section2">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="d-flex flex-row add-comment-section mt-4 mb-4">
+              <input
+                type="text"
+                class="form-control mr-3"
+                placeholder="Add comment"
+              />
+              <button class="btn text-white" type="button">Comment</button>
+            </div>
+
+            <!-- Single Comment -->
+            <div class="card p-3 mt-2">
+              <div class="comments">
+                <div class="d-flex flex-row comment-user">
+                  <img
+                    class="img-fluid img-responsive rounded-circle mr-2"
+                    src="https://i.imgur.com/qdiP4DB.jpg"
+                    width="38"
+                  />
+                  <div class="ml-2">
+                    <div class="d-flex flex-row align-items-center">
+                      <span class="name font-weight-bold">Deepak@200</span
+                      ><span class="dot"></span
+                      ><span class="date ml-3">30 Aug 2020</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-2">
+                  <p>
+                    It is a long established fact that a reader will be
+                    distracted by the readable content of a page when looking at
+                    its layout.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="card p-3 mt-2">
+              <div class="comments">
+                <div class="d-flex flex-row comment-user">
+                  <img
+                    class="img-fluid img-responsive rounded-circle mr-2"
+                    src="https://i.imgur.com/qdiP4DB.jpg"
+                    width="38"
+                  />
+                  <div class="ml-2">
+                    <div class="d-flex flex-row align-items-center">
+                      <span class="name font-weight-bold">Deepak@200</span
+                      ><span class="dot"></span
+                      ><span class="date ml-3">30 Aug 2020</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-2">
+                  <p>
+                    It is a long established fact that a reader will be
+                    distracted by the readable content of a page when looking at
+                    its layout.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="card p-3 mt-2">
+              <div class="comments">
+                <div class="d-flex flex-row comment-user">
+                  <img
+                    class="img-fluid img-responsive rounded-circle mr-2"
+                    src="https://i.imgur.com/qdiP4DB.jpg"
+                    width="38"
+                  />
+                  <div class="ml-2">
+                    <div class="d-flex flex-row align-items-center">
+                      <span class="name font-weight-bold">Deepak@200</span
+                      ><span class="dot"></span
+                      ><span class="date ml-3">30 Aug 2020</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-2">
+                  <p>
+                    It is a long established fact that a reader will be
+                    distracted by the readable content of a page when looking at
+                    its layout.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-2"></div>
+        </div>
+      </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script>
       var now = new Date();
       var days = [
@@ -76,10 +209,6 @@
 
       document.getElementById("today").value = formatDate(now);
     </script>
-    {% block content %}{% endblock content %}
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script
       src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
       integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"

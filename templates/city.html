@@ -2,7 +2,6 @@
 <div id="rahukal" class="container">
       <div class="rahukal-times">
         <h4 class="h4-color">Current time in your city : <span id="clock"></span></h4>
-        <h5 class="rahu">Rahu kal</h5>
 {%if rahukal%}
         <div class="time">
           <div class="rahu-info">
@@ -27,7 +26,7 @@
             </div>
             <div class="sec-3 pr-3">
               <h5 class="h5-color pr-3">Duration</h5>
-              <h6 class="duration">01 : 18 : 00</h6>
+              <h6 class="duration">{{rahukal.0.duration}}</h6>
             </div>
             <form id="dateForm" action=" {% url 'city' %} " method="get">
   <input type="hidden" name="city" value="{{city}}, {{rahukal.0.country}} " />
@@ -39,7 +38,7 @@
     value="{{today_date}}"
     onchange="submitHandler()"
   />
-  <button onclick="tomorrow()" type="submit" class="today" >Tomorrow</button>
+  <button id="tomorrow" onclick="tomorrow()" type="submit" class="today" >Tomorrow</button>
   {% comment %} <button type="submit">submit</button> {% endcomment %}
 </form>
           </div>
