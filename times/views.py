@@ -88,6 +88,7 @@ def index(request):
     b = a.copy()
     rahukal_days.append(b)
   context = {'rahukal': rahukal_days}
+  context['ali'] = 'ali'
 
   return render(request,'index.html',context)
 
@@ -99,15 +100,14 @@ def index(request):
 
 def city(request):
   context = {}
-  city_name = request.GET['city']
+  city_name = request.POST['city']
   country_name = city_name.split(", ")[1]
   city_name = city_name.split(", ")[0]
-  day_name = request.GET['day']
-  today_date = request.GET['today']
+  day_name = request.POST['day']
+  today_date = request.POST['today']
   context['city'] = city_name
   context['day_name'] = day_name
   context['today_date'] = today_date
-
   days = {
   'Monday': 1,
   'Saturday': 2,
@@ -202,7 +202,7 @@ def city(request):
   except Exception:
       print('oww sorry we couldn\'t find your Location')
 
-
+  print(context)
   context['rahukal'] = rahukal_days
   return render(request,'city.html',context)
 

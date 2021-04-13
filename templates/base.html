@@ -15,6 +15,12 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
     <!-- Bootstrap CSS -->
     <link
       rel="stylesheet"
@@ -26,35 +32,26 @@
 
     <title>Rahu Kal</title>
   </head>
-  <script>
-    var now = new Date();
-    var days = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-    ];
-
-    var day = days[now.getDay()];
-    document.getElementById("day").value = day;
-
-    function formatDate(date) {
-      var d = new Date(date),
-        month = "" + (d.getMonth() + 1),
-        day = "" + d.getDate(),
-        year = d.getFullYear();
-
-      if (month.length < 2) month = "0" + month;
-      if (day.length < 2) day = "0" + day;
-
-      return [year, month, day].join("-");
+  <style>
+    #input_container {
+      position: relative;
+      margin: 0 20px;
+      width: inherit;
     }
-
-    document.getElementById("today").value = formatDate(now);
-  </script>
+    #input {
+      height: 20px;
+      margin: 0;
+      padding-right: 30px;
+      width: 100%;
+    }
+    #input_img {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 24px;
+      height: 24px;
+    }
+  </style>
   <body>
     <header>
       <a
@@ -64,23 +61,34 @@
         ><img src="{% static 'assets/images/Capture.png'%}  " class="img-fluid"
       /></a>
     </header>
-    <div class="forms container">
-      <form action="{% url 'city' %}" method="get" autocomplete="off">
+    <div class="form container">
+      <form action="{% url 'city' %}" method="post" autocomplete="off">
+        {% csrf_token %}
         <div class="search">
-          <input
-            type="text"
-            name="city"
-            id="search"
-            placeholder="Enter city"
-            autocomplete="off"
-          />
-          <button id="searchbtn" class="ml-3" type="submit">search</button>
+          <div id="input_container">
+            <input
+              type="text"
+              name="city"
+              id="search"
+              placeholder="Enter city"
+              autocomplete="off"
+              value
+            />
+            <i class="fas fa-search-location fa-2x" id="input_img"></i>
+          </div>
+          <!--<input-->
+          <!--  type="text"-->
+          <!--  name="city"-->
+          <!--  id="search"-->
+          <!--  placeholder="Enter city"-->
+          <!--  autocomplete="off"-->
+          <!--/>-->
         </div>
         <input id="day" type="hidden" name="day" value="" />
         <input id="today" type="hidden" name="today" value="" />
         <div id="match-list"></div>
+        <!--<button id="searchbtn" class="ml-3" type="button" onclick="sub()" >search</button>-->
       </form>
-
       <h1 class="pt-3"><b>Rahu kal</b></h1>
     </div>
     {% block content %}{% endblock content %}
@@ -224,6 +232,35 @@
       integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
       crossorigin="anonymous"
     ></script>
+    <script>
+      var now = new Date();
+      var days = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ];
+
+      var day = days[now.getDay()];
+      document.getElementById("day").value = day;
+
+      function formatDate(date) {
+        var d = new Date(date),
+          month = "" + (d.getMonth() + 1),
+          day = "" + d.getDate(),
+          year = d.getFullYear();
+
+        if (month.length < 2) month = "0" + month;
+        if (day.length < 2) day = "0" + day;
+
+        return [year, month, day].join("-");
+      }
+
+      document.getElementById("today").value = formatDate(now);
+    </script>
     <script src="{% static 'assets/js/test.js' %}"></script>
   </body>
 </html>

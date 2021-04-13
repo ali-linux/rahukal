@@ -1,4 +1,5 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
+
 <div id="rahukal" class="container">
       <div class="rahukal-times">
         <h4 class="h4-color">Current time in your city : <span id="clock"></span></h4>
@@ -28,7 +29,8 @@
               <h5 class="h5-color pr-3">Duration</h5>
               <h6 class="duration">{{rahukal.0.duration}}</h6>
             </div>
-            <form id="dateForm" action=" {% url 'city' %} " method="get">
+            <form id="dateForm" action=" {% url 'city' %} " method="post">
+            {%csrf_token%}
   <input type="hidden" name="city" value="{{city}}, {{rahukal.0.country}} " />
   <input id="dai" type="hidden" name="day" value="{{day_name}}" />
   <input
@@ -38,7 +40,7 @@
     value="{{today_date}}"
     onchange="submitHandler()"
   />
-  <button id="tomorrow" onclick="tomorrow()" type="submit" class="today" >Tomorrow</button>
+  <input id="tomorrow" onclick="t()" type='button' class="today"  value='Tomorrow'>
   {% comment %} <button type="submit">submit</button> {% endcomment %}
 </form>
           </div>
@@ -140,6 +142,41 @@
   </div>
 </div>
 <script>
+      var now = new Date();
+      var days = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ];
+
+      var day = days[now.getDay()];
+      document.getElementById("day").value = day;
+
+      function formatDate(date) {
+        var d = new Date(date),
+          month = "" + (d.getMonth() + 1),
+          day = "" + d.getDate(),
+          year = d.getFullYear();
+
+        if (month.length < 2) month = "0" + month;
+        if (day.length < 2) day = "0" + day;
+
+        return [year, month, day].join("-");
+      }
+
+      document.getElementById("today").value = formatDate(now);
+  function t() {
+const date = document.getElementById("date");
+    const d = new Date(date.value);
+    d.setDate(d.getDate() + 1);
+    date.value = formatDate(d);
+    console.log(date.value);
+    const a = document.getElementById("dateForm");
+    a.submit();  }
 var time = new Date();
  document.getElementById('clock').innerHTML = time.toLocaleTimeString();
   const date = document.getElementById("date").value;
@@ -162,12 +199,6 @@ var time = new Date();
   function submitHandler() {
     const a = document.getElementById("dateForm");
     a.submit();
-  }
-  function tomorrow() {
-    const date = document.getElementById("date");
-    const d = new Date(date.value);
-    d.setDate(d.getDate() + 1);
-    date.value = formatDate(d);
   }
 </script>
 {% endblock content %}
